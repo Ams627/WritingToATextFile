@@ -1,0 +1,18 @@
+:toc:
+:sectnums:
+:toclevels: 5
+:sectnumlevels: 5
+:showcomments:
+:xrefstyle: short
+:icons: font
+:source-highlighter: coderay
+:tick: &#x2714;
+:pound: &#xA3;
+
+= Writing to a text file in C#
+
+== Writing an array
+
+Simply use `File.WriteAllLines` to write one element per line:
+
+
