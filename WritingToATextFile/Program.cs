@@ -15,7 +15,18 @@ namespace WritingToATextFile
         {
             try
             {
-                //startstarttypingtypingherehere
+                // get the integers 1 to 10:
+                var integers = Enumerable.Range(1, 20).Select(x => $"{x}");
+                File.AppendAllLines("f1.txt", integers);
+                
+
+                using (var sw = new StreamWriter("sw.txt"))
+                {
+                    foreach (var s in integers)
+                    {
+                        sw.WriteLine(s);
+                    }
+                }
             }
             catch (Exception ex)
             {

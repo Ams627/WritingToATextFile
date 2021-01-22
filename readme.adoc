@@ -11,8 +11,81 @@
 
 = Writing to a text file in C#
 
-== Writing an array
+== Writing an `IEnumerable` of strings
 
 Simply use `File.WriteAllLines` to write one element per line:
+
+[source,csharp]
+----
+// get the integers 1 to 10:
+var integers = Enumerable.Range(1, 10).Select(x=>$"{x}");
+File.WriteAllLines("test.txt", integers);
+----
+
+Using this method, there is no need to open and close the file - the single call to `WriteAllLines` opens the file, writes the lines
+in the container and closes the file.
+
+Any type that implements `IEnumerable` (where the contained type is `string`) can be used, for example a `HashSet`:
+
+[source,csharp]
+----
+var integers = Enumerable.Range(1, 10).Select(x=>$"{x}").ToHashSet();
+File.WriteAllLines("f1.txt", integers);
+----
+
+=== Overwrite or Append?
+
+`WriteAllLines` either creates a new file or overwrites an existing one. Use `AppendAllLines` to add the contents of an `IEnumerable` to the
+end of a file.
+
+----
+var integers = Enumerable.Range(1, 20).Select(x => $"{x}");
+File.AppendAllLines("f1.txt", integers);
+----
+
+== Writing a string to a file
+
+== Writing bytes to a file
+
+== Using Write and WriteLine
+
+**Use `StreamWriter`**.
+
+
+[source,csharp]
+----
+var integers = Enumerable.Range(1, 10).Select(x=>$"{x}");
+
+using (var sw = new StreamWriter("sw.txt"))
+{
+    foreach (var s in integers)
+    {
+        sw.WriteLine(s);
+    }
+}
+----
+
+
+== Reading lines from a file
+
+== Reading text from a file
+
+== Using `ReadLine`
+
+== Getting a file's attributes
+
+== Hashing a file
+
+== Processing paths
+
+== Controlling line endings
+
+== Detecting "funny" line endings
+
+=== BOM
+
+=== UTF-8
+
+=== Unix2DOS and DOS2Unix
 
 
